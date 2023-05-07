@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Message = () => {
-  return (
+const Message =() => {
+  return(
     <div>Message</div>
   )
 }
