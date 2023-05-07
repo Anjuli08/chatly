@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Add from '../img/addimg.png'
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, storage } from "../firebase";
