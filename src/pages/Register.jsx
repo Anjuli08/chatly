@@ -3,12 +3,14 @@ import Add from '../img/addimg.png'
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../firebase";
 import {  ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-
 import { doc, setDoc } from "firebase/firestore";
 
+
 const Register = () => {
-    const [err,setErr] = useState(false)
+    const [err,setErr] = useState(false);
+    const [loading, setLoading] = useState(false);
     const handleSubmit = async (e)=>{
+      setLoading(true);
     e.preventDefault()
     const displayName = e.target[0].value;
     const email = e.target[1].value;
@@ -24,21 +26,27 @@ const Register = () => {
 
       const uploadTask = uploadBytesResumable(storageRef, file);
 
-  
+
       uploadTask.on(
         (error) => {
           setErr(true);
         },
         () => {
             getDownloadURL(uploadTask.snapshot.ref).then( async(downloadURL) => {
-              await updateProfile(res.user,{
+              await updateProfile(res.user, {
                 displayName,
-                photoURL:downloadURL,
-
-              })
+                photoURL: downloadURL,
+              });
+              await setDoc(doc(db, "users", res.user.uid), {
+                uid: res.user.uid,
+                displayName,
+                email,
+                photoURL: downloadURL,
+              });
           });
         }
       );
+
     }catch(err){
       setErr(true);
     }
@@ -56,7 +64,7 @@ const Register = () => {
             <input type='email' placeholder='email'/>
             <input type='password' placeholder='passowrd'/>
             <input style={{display:'none'}} type='file' id='file'/>
-            <label htmlForm='file'>
+            <label htmlFor='file'>
               <img src={Add} alt='' />
               <span>Add an avatar</span>
             </label>
@@ -66,7 +74,7 @@ const Register = () => {
           <p>You do have an account? Login</p>
         </div>
       </div>
-    )
-}
+    );
+};
 
 export default Register
