@@ -8,11 +8,11 @@ import { auth } from "../firebase";
 const Login = () => {
 
   const [err,setErr] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
    const navigate = useNavigate();
 
   const handleSubmit = async (e)=>{
-    setLoading(true);
+    // setLoading(true);
     e.preventDefault();
   const email = e.target[0].value;
   const password = e.target[1].value;

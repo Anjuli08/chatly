@@ -8,11 +8,11 @@ import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
     const [err,setErr] = useState(false);
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
      const navigate = useNavigate();
 
     const handleSubmit = async (e)=>{
-      setLoading(true);
+      // setLoading(true);
     e.preventDefault()
     const displayName = e.target[0].value;
     const email = e.target[1].value;
