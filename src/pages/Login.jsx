@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from "react-router-dom";
-import Add from '../img/addimg.png'
+// import Add from '../img/addimg.png'
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
